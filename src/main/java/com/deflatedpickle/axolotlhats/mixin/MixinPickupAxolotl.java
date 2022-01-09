@@ -28,7 +28,7 @@ abstract public class MixinPickupAxolotl extends AnimalEntity {
     @Override
     public void tickRiding() {
         super.tickRiding();
-        assert vehicle != null;
+        if (vehicle == null) return;
         AxolotlHats.INSTANCE.tickRiding((AxolotlEntity) (Object) this, vehicle);
     }
 }
