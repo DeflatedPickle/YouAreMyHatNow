@@ -17,6 +17,10 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+ext {
+	new File("./lib").mkdir()
+}
+
 repositories {
 	flatDir {
 		dirs "./lib", "./.gradle/loom-cache/remapped_mods"
@@ -41,16 +45,16 @@ dependencies {
 	modRuntime files("./lib")
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/${archives_base_name}.accesswidener")
+}
+
 task copyLocal(type: Copy) {
 	from("./lib")
 	into("./run/mods")
 	include("*.jar")
 }
 processResources.dependsOn copyLocal
-
-loom {
-	accessWidenerPath = file("src/main/resources/${archives_base_name}.accesswidener")
-}
 
 compileJava {
 	options.encoding = "UTF-8"

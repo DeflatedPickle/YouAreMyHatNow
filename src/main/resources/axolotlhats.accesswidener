@@ -1,0 +1,5 @@
+accessWidener	v1	named
+
+accessible    field    net/minecraft/entity/Entity    vehicle    Lnet/minecraft/entity/Entity;
+accessible    method    net/minecraft/entity/Entity    addPassenger    (Lnet/minecraft/entity/Entity;)V
+accessible    method    net/minecraft/entity/player/PlayerEntity    shouldDismount    ()Z
