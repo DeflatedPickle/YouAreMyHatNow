@@ -1,9 +1,15 @@
 package com.deflatedpickle.axolotlhats.mixin;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.AxolotlEntity;
+import net.minecraft.entity.passive.FoxEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -24,7 +30,13 @@ public abstract class MixinPlayerEntity extends Entity {
 
     @Override
     public void updatePassengerPosition(Entity passenger) {
-        if (!(passenger instanceof AxolotlEntity) || !this.hasPassenger(passenger)) return;
+        if (!(passenger instanceof AnimalEntity) || !this.hasPassenger(passenger)) return;
+
+        if (passenger instanceof FoxEntity) {
+            ((FoxEntity) passenger).setSleeping(true);
+        } else if (passenger instanceof TameableEntity) {
+            ((TameableEntity) passenger).setSitting(true);
+        }
 
         passenger.setPosition(
                 this.getX(),
