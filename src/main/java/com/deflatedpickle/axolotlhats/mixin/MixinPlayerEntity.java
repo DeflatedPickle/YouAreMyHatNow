@@ -40,7 +40,10 @@ public abstract class MixinPlayerEntity extends Entity {
 
         passenger.setPosition(
                 this.getX(),
-                this.getY() + this.getMountedHeightOffset() + passenger.getHeightOffset() + 0.3,
+                this.getY()
+                        + this.getMountedHeightOffset()
+                        + (passenger.getHeightOffset() + 0.3)
+                        * (this.getPassengerList().indexOf(passenger) + 1),
                 this.getZ()
         );
         passenger.setYaw(this.getYaw());
